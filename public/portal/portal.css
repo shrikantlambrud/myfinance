@@ -1,0 +1,44 @@
+/* Customer app: single centered column, big type, phone first */
+body.portal { background: var(--paper); }
+.p-wrap { max-width: 640px; margin: 0 auto; padding: calc(14px + var(--safe-t)) 16px calc(40px + var(--safe-b)); }
+.p-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 4px 0 16px; }
+.p-top .brand { padding: 0; }
+.lang { display: inline-flex; background: var(--rule-soft); border-radius: 99px; padding: 3px; }
+.lang button { border: 0; background: transparent; padding: 5px 12px; border-radius: 99px; font-weight: 600; color: var(--ink-2); cursor: pointer; min-height: 34px; }
+.lang button[aria-pressed="true"] { background: var(--card); color: var(--neel-dark); box-shadow: 0 1px 2px rgba(24,32,47,.15); }
+.p-hello { font-size: 20px; font-weight: 700; margin-bottom: 14px; }
+.due-card { background: var(--card); border: 1px solid var(--rule); border-radius: 14px; padding: 20px 20px 18px; position: relative; overflow: hidden; }
+.due-card::before, .due-card::after { content: ''; position: absolute; top: 0; bottom: 0; width: 1px; background: var(--margin); opacity: .6; }
+.due-card::before { left: 10px; } .due-card::after { left: 14px; }
+.due-card > * { position: relative; margin-left: 12px; }
+.due-card .cap { color: var(--ink-2); }
+.due-card .amt { font-family: var(--font-num); font-size: 38px; font-weight: 600; letter-spacing: -.02em; line-height: 1.1; margin: 4px 0; }
+.due-card.late .amt { color: var(--margin); }
+.due-card .when { font-weight: 600; }
+.due-card .when.late { color: var(--margin); }
+.p-sum { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--rule); border-radius: 12px; background: var(--card); margin-top: 14px; }
+.p-sum > div { padding: 14px 16px; }
+.p-sum > div + div { border-left: 1px solid var(--rule); }
+.p-sum .k { color: var(--ink-2); font-size: 14px; }
+.p-sum .v { font-family: var(--font-num); font-size: 20px; font-weight: 600; }
+.p-h { font-size: 17px; margin: 24px 0 10px; }
+.loan-card { display: block; background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 14px 16px; color: inherit; text-decoration: none; margin-bottom: 10px; }
+.loan-card:hover { border-color: #b8c0b6; text-decoration: none; }
+.loan-card .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.loan-card .no { font-family: var(--font-num); font-weight: 600; }
+.loan-card .row2 { display: flex; justify-content: space-between; gap: 10px; margin-top: 8px; color: var(--ink-2); font-size: 15px; }
+.p-block { background: var(--card); border: 1px solid var(--rule); border-radius: 12px; overflow: hidden; margin-bottom: 14px; }
+.p-block h3 { padding: 14px 16px 6px; font-size: 16px; }
+.p-block .khata { margin: 0 12px 14px; }
+.p-sched { list-style: none; margin: 0; padding: 0; }
+.p-sched li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 16px; border-top: 1px solid var(--rule-soft); }
+.p-sched li.paid { color: var(--ink-3); }
+.p-sched li.overdue { background: var(--margin-tint); }
+.p-sched li.due { background: var(--haldi-tint); }
+.p-sched .d { font-weight: 600; }
+.p-sched .s { font-size: 14px; color: var(--ink-2); }
+.p-call { display: flex; gap: 10px; margin-top: 18px; }
+.p-call .btn { flex: 1; }
+.p-foot { text-align: center; color: var(--ink-3); font-size: 14px; margin-top: 26px; }
+
+.p-block .facts { grid-template-columns: 1fr 1fr; }
