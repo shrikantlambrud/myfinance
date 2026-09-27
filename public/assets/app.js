@@ -184,4 +184,8 @@ on('logout', async () => {
 });
 window.addEventListener('mf:logout', () => { state.user = null; loginScreen('Your session ended. Please sign in again.'); });
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('/sw.js').catch(() => { /* offline shell is a nice-to-have, never block on it */ }); });
+}
+
 boot();

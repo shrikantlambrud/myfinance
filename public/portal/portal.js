@@ -223,4 +223,9 @@ async function boot() {
   document.title = t().title;
   route();
 }
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('/portal/sw.js').catch(() => { /* offline shell is a nice-to-have, never block on it */ }); });
+}
+
 boot();
