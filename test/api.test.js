@@ -362,6 +362,37 @@ test('reports: profit & loss and CSV exports', async () => {
   assert.match(pay.data, /RC0000/);
 });
 
+test('analytics: owner-only, series are per-month, portfolio totals agree with the dashboard', async () => {
+  assert.equal((await h.req('GET', '/api/analytics', undefined, staff)).status, 403);
+  assert.equal((await h.req('GET', '/api/analytics')).status, 401);
+  const r = await h.req('GET', '/api/analytics?months=6', undefined, owner);
+  assert.equal(r.status, 200, JSON.stringify(r.data));
+  const a = r.data;
+  assert.equal(a.months.length, 6);
+  assert.equal(a.months[5], '2026-03'); // harness "today" is 2026-03-15
+  for (const k of ['interest', 'fees_charges', 'investment_profit', 'income', 'costs', 'net', 'disbursed', 'collected']) {
+    assert.equal(a.series[k].length, 6, k);
+  }
+  // net = income - costs, month by month (to the paisa)
+  a.series.net.forEach((n, i) => assert.equal(Math.round((a.series.income[i] - a.series.costs[i]) * 100), Math.round(n * 100)));
+  // the portfolio pieces must add up to what the dashboard says is lent out
+  const dash = (await h.req('GET', '/api/dashboard', undefined, owner)).data;
+  const sum = (arr, f) => Math.round(arr.reduce((t, x) => t + f(x) * 100, 0)) / 100;
+  assert.equal(a.portfolio.outstanding, dash.lent.principal_outstanding);
+  assert.equal(sum(a.portfolio.by_type, (x) => x.value), dash.lent.principal_outstanding);
+  assert.equal(sum(a.portfolio.by_customer, (x) => x.value), dash.lent.principal_outstanding);
+  assert.equal(a.kpis.active_loans, dash.lent.count);
+  // ageing counts only overdue loans
+  assert.equal(a.portfolio.ageing.reduce((t, b) => t + b.count, 0), dash.overdue.count);
+  // status mix covers every non-void loan we gave
+  const given = (await h.req('GET', '/api/loans?direction=given&limit=1000', undefined, owner)).data.loans.filter((l) => l.status !== 'void');
+  assert.equal(a.portfolio.status.reduce((t, s2) => t + s2.count, 0), given.length);
+  // top customers list is sorted high to low
+  const ti = a.top_interest.map((c) => c.value);
+  assert.deepEqual(ti, [...ti].sort((x, y) => y - x));
+  assert.equal((await h.req('GET', '/api/analytics?months=99', undefined, owner)).status, 400);
+});
+
 test('users & settings (owner)', async () => {
   const u = await h.req('POST', '/api/users', { username: 'newstaff', name: 'New Staff', role: 'staff', password: 'Sup3rSecret' }, owner);
   assert.equal(u.status, 201);
