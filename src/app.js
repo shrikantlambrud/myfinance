@@ -68,7 +68,7 @@ function serveStatic(req, res, pathname) {
 
 function createApp({ db, cfg }) {
   const router = new Router();
-  for (const name of ['auth', 'users', 'parties', 'loans', 'payments', 'collections', 'dashboard', 'ledger', 'investments', 'reports', 'settings', 'portal']) {
+  for (const name of ['auth', 'users', 'parties', 'loans', 'payments', 'collections', 'dashboard', 'ledger', 'investments', 'reports', 'analytics', 'settings', 'portal']) {
     require(`./routes/${name}`)(router, { db, cfg });
   }
 
