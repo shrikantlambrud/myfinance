@@ -7,6 +7,7 @@ import * as loans from './views/loans.js';
 import * as people from './views/people.js';
 import * as money from './views/money.js';
 import * as admin from './views/admin.js';
+import * as analytics from './views/analytics.js';
 
 const app = document.getElementById('app');
 
@@ -21,6 +22,7 @@ const ROUTES = [
   { re: /^\/cash$/, nav: 'cash', owner: true, view: money.cash },
   { re: /^\/invest$/, nav: 'invest', owner: true, view: money.invest },
   { re: /^\/borrowed$/, nav: 'borrowed', owner: true, view: loans.list('taken') },
+  { re: /^\/analytics$/, nav: 'analytics', owner: true, view: analytics.view },
   { re: /^\/reports$/, nav: 'reports', owner: true, view: admin.reports },
   { re: /^\/team$/, nav: 'team', owner: true, view: admin.team },
   { re: /^\/settings$/, nav: 'settings', owner: true, view: admin.settings },
@@ -36,6 +38,7 @@ const NAV = [
   { id: 'cash', href: '#/cash', label: 'Cash book', icon: icon.cash, owner: true },
   { id: 'borrowed', href: '#/borrowed', label: 'Borrowed', icon: icon.borrow, owner: true },
   { id: 'invest', href: '#/invest', label: 'Investments', icon: icon.invest, owner: true },
+  { id: 'analytics', href: '#/analytics', label: 'Analytics', icon: icon.chart, owner: true },
   { id: 'reports', href: '#/reports', label: 'Reports', icon: icon.report, owner: true },
   { sep: true, owner: true },
   { id: 'team', href: '#/team', label: 'Team', icon: icon.team, owner: true },

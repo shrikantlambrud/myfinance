@@ -46,8 +46,8 @@ export async function cash(root) {
     </div>
     <div style="height:18px"></div>
     <section class="section">
-      <div class="section-head"><div class="chips" id="cb-chips">${GROUPS.map(([k, l]) => h`<button class="chip" data-g="${k}" aria-pressed="${k === group}">${l}</button>`)}</div>
-        <button class="chip" id="cb-bal-toggle" aria-pressed="${showBalance}">${showBalance ? 'Hide balance' : 'Show balance'}</button></div>
+      <div class="section-head"><div class="chips" id="cb-chips">${GROUPS.map(([k, l]) => h`<button class="chip" data-g="${k}" aria-pressed="${String(k === group)}">${l}</button>`)}</div>
+        <button class="chip" id="cb-bal-toggle">${showBalance ? 'Hide balance' : 'Show balance'}</button></div>
       ${rows.length ? h`<div class="tbl-wrap"><table class="tbl stackable"><thead><tr><th>Date</th><th>Details</th><th class="r">In</th><th class="r">Out</th>${showBalance ? h`<th class="r">Balance</th>` : ''}<th></th></tr></thead><tbody>
         ${rows.map((e) => h`<tr class="${e.reversed_at ? 'is-waived' : ''}"><td class="first" data-label="Date">${fmtDate(e.entry_date)}</td>
           <td data-label="Details"><b>${KIND[e.kind] || e.kind}</b>${e.reversed_at ? h` <span class="badge overdue">Reversed</span>` : ''}<div class="sub">${e.note || ''}</div></td>

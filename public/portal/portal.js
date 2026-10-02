@@ -57,7 +57,7 @@ function fd(iso) {
 const rateText = (l) => (l.type === 'emi_daily' ? t().per_day(l.rate) : t().per_month(l.rate));
 
 function langSwitch() {
-  return h`<div class="lang" role="group" aria-label="${t().lang_note}"><button data-lang="mr" aria-pressed="${lang === 'mr'}">मराठी</button><button data-lang="en" aria-pressed="${lang === 'en'}">English</button></div>`;
+  return h`<div class="lang" role="group" aria-label="${t().lang_note}"><button data-lang="mr" aria-pressed="${String(lang === 'mr')}">मराठी</button><button data-lang="en" aria-pressed="${String(lang === 'en')}">English</button></div>`;
 }
 on('lang', () => {});
 document.addEventListener('click', (e) => {

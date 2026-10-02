@@ -29,7 +29,7 @@ export async function reports(root) {
   mount(root, h`
     <div class="page-head"><div><h1>Reports</h1><div class="sub">${fmtDate(r.from)} to ${fmtDate(r.to)}</div></div></div>
     <section class="section">
-      <div class="section-head"><div class="chips" id="rp-chips">${PRESETS.map(([k, l]) => h`<button class="chip" data-k="${k}" aria-pressed="${k === repKind}">${l}</button>`)}</div>
+      <div class="section-head"><div class="chips" id="rp-chips">${PRESETS.map(([k, l]) => h`<button class="chip" data-k="${k}" aria-pressed="${String(k === repKind)}">${l}</button>`)}</div>
         <div class="row wrap"><input type="date" id="rp-from" value="${r.from}" aria-label="From date" style="width:auto"><span class="muted">to</span><input type="date" id="rp-to" value="${r.to}" aria-label="To date" style="width:auto"></div></div>
       <div class="section-body">
         <table class="sum" style="max-width:560px">
@@ -164,7 +164,7 @@ export async function settings(root) {
 export async function more(root) {
   const owner = isOwner();
   const items = [
-    ...(owner ? [['#/cash', 'Cash book', icon.cash], ['#/invest', 'Investments', icon.invest], ['#/borrowed', 'Borrowed money', icon.borrow], ['#/reports', 'Reports', icon.report], ['#/team', 'Team', icon.team], ['#/settings', 'Settings', icon.settings]] : []),
+    ...(owner ? [['#/cash', 'Cash book', icon.cash], ['#/invest', 'Investments', icon.invest], ['#/borrowed', 'Borrowed money', icon.borrow], ['#/analytics', 'Analytics', icon.chart], ['#/reports', 'Reports', icon.report], ['#/team', 'Team', icon.team], ['#/settings', 'Settings', icon.settings]] : []),
   ];
   mount(root, h`<div class="page-head"><div><h1>More</h1><div class="sub">Signed in as ${state.user.name}</div></div></div>
     <section class="section">${items.map(([href, label, ic]) => h`<a class="list-row" href="${href}" style="text-decoration:none;color:inherit"><span style="width:22px;display:inline-grid">${ic}</span><span class="t grow">${label}</span></a>`)}

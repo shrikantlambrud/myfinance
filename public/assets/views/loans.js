@@ -20,7 +20,7 @@ export const list = (direction) => async function listView(root, _p, query) {
       <a class="btn" href="${taken ? '#/new?direction=taken' : '#/new'}">${icon.plus} ${taken ? 'Add borrowing' : 'New loan'}</a></div>
     <section class="section">
       <div class="section-head">
-        <div class="chips" id="ln-chips">${FILTERS.map(([k, l]) => h`<button class="chip" data-status="${k}" aria-pressed="${k === status}">${l}</button>`)}</div>
+        <div class="chips" id="ln-chips">${FILTERS.map(([k, l]) => h`<button class="chip" data-status="${k}" aria-pressed="${String(k === status)}">${l}</button>`)}</div>
         <div class="search">${icon.search}<input type="search" id="ln-q" placeholder="Search name, phone or loan no." value="${q}" aria-label="Search loans"></div>
       </div>
       <div id="ln-body"><div class="spinner"></div></div>
@@ -214,7 +214,7 @@ export async function detail(root, [id]) {
         <div><div class="k">${l.type === 'interest_only' ? 'Interest paid so far' : 'Interest still to come'}</div><div class="v">${inr(l.type === 'interest_only' ? s.total_interest_paid : s.interest_remaining)}</div></div>
       </div>
       ${closure ? h`<div style="border-top:1px solid var(--rule)">${closure}</div>` : ''}
-      <div class="tabs" role="tablist" id="ld-tabs">${tabs.map(([k, t]) => h`<button role="tab" data-tab="${k}" aria-selected="${k === currentTab}">${t}</button>`)}</div>
+      <div class="tabs" role="tablist" id="ld-tabs">${tabs.map(([k, t]) => h`<button role="tab" data-tab="${k}" aria-selected="${String(k === currentTab)}">${t}</button>`)}</div>
       <div id="ld-tab" style="padding-top:14px">${tabBody}</div>
     </section>`);
 
