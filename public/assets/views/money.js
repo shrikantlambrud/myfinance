@@ -51,8 +51,8 @@ export async function cash(root) {
       ${rows.length ? h`<div class="tbl-wrap"><table class="tbl stackable"><thead><tr><th>Date</th><th>Details</th><th class="r">In</th><th class="r">Out</th>${showBalance ? h`<th class="r">Balance</th>` : ''}<th></th></tr></thead><tbody>
         ${rows.map((e) => h`<tr class="${e.reversed_at ? 'is-waived' : ''}"><td class="first" data-label="Date">${fmtDate(e.entry_date)}</td>
           <td data-label="Details"><b>${KIND[e.kind] || e.kind}</b>${e.reversed_at ? h` <span class="badge overdue">Reversed</span>` : ''}<div class="sub">${e.note || ''}</div></td>
-          <td class="r num pos" data-label="In">${e.direction === 'in' ? inr(e.amount) : ''}</td><td class="r num" data-label="Out">${e.direction === 'out' ? inr(e.amount) : ''}</td>
-          ${showBalance ? h`<td class="r num" data-label="Balance">${inr(balanceAfter.get(e.id))}</td>` : ''}
+          <td class="r num pos" data-label="In">${e.direction === 'in' ? inr(e.amount) : ''}</td><td class="r num neg" data-label="Out">${e.direction === 'out' ? inr(e.amount) : ''}</td>
+          ${showBalance ? h`<td class="r num cb-balance" data-label="Balance">${inr(balanceAfter.get(e.id))}</td>` : ''}
           <td class="r noLabel">${e.manual && !e.reversed_at ? h`<button class="btn quiet small neg" data-action="cash-reverse" data-id="${e.id}">Reverse</button>` : ''}</td></tr>`)}</tbody></table></div>`
     : h`<div class="empty"><strong>Nothing here yet</strong>Add your starting capital to begin.</div>`}
     </section>`);

@@ -441,3 +441,6 @@ path[class*="ch-a"] { opacity: .13; }
   .chart-body { padding: 2px 8px 14px; }
   .hb-row { grid-template-columns: minmax(70px, 34%) 1fr auto; gap: 8px; }
 }
+
+/* cash book: in=green (.pos), out=red (.neg) already; balance explicitly black */
+.cb-balance { color: var(--ink); font-weight: 600; }
